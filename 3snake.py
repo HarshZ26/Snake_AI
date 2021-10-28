@@ -23,7 +23,7 @@ except:
 	q_val = np.zeros((4,2,2,2,3))
 def policy(epsilon,d,frud,fob,lob,rob):
 	'''Policy function helps to determine the suitable action for an agent for a state.State parameters are passed to the 
-	fucntion -
+	function -
 	frud - direction of food relative to snake's head
 	fob = to check presence of obstacle in immediate Forward block of snake's head
 	lob = to check presence of obstacle in immediate Left block of snake's head
