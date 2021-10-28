@@ -5,55 +5,87 @@
 ## Description
 ![](https://i.imgur.com/DLDVj7C.gif)
 
-
-It is an attempt to solve classic snake game using Reinforcement learning Tabular method i.e Q-learning.
+This is an attempt to solve classic snake game using Reinforcement learning method i.e Q-learning.
 
 ## Implementation
+
 ### Action Space
+
 One important thing to note is that all the actions and directions are relative to snake's head. They are related by following relation-
 
 Current Directions(as mentioned in snakeEnv)-
 
-	UP - 0
+	UP    - 0
 	RIGHT - 1
-	DOWN - 2
-	LEFT -4
+	DOWN  - 2
+	LEFT  - 4
 	
 New relative actions-
 	
-	LEFT - d-1
-	RIGHT - d+1
-	FORWARD -d 
-	BACKWARD - abs(d-2)
-where d is the direction of snake's head wrt. environment. All the exceptions are handled for particular direction.For example- if a head is facing UP , so relatively LEFT action must be 3 not -1. Similarly other exceptions are handled. 
-### State Space
-State-space is visualized as 4-D array which tells information about environment. First is direction of food wrt. snake's head.
-Other three tells about presence of obstacle adjacent to snake's head in all three directions.
+	LEFT     -  d-1
+	RIGHT    -  d+1
+	FORWARD  -  d 
+	BACKWARD -  abs(d-2)
+    
+Where d is the direction of snake's head. All the exceptions are handled for particular direction. For example - if a head is facing UP, so relatively LEFT action must be 3 not -1. Similarly other exceptions are handled.
 
-	0 - Obstacle or wall
-	1 - Free space
+### State Space
+
+A state is defined by 4 parameters, these are
+
+a) Relative direction of the food - 4
+b) Presence of obstacle or border immediately to the left of the snake head - 2 (0 or 1)
+c) Presence of obstacle or border immediately to the right of the snake head
+d) Presence of obstacle or border in front of the snake head
+
+This establishes a state space that has (4 x 2 x 2 x 2) = 32 states
+
+These aren't enough to completely solve the game, but it learns how to play decently.
 
 ### Reward function
+
 * +1 for eating the food
 * -1 for hitting with wall or its body
 
 Except above two conditions by default value of reward function is 0.
 
 ### Algorithm
+
 Off-policy learning method namely Q-learning is used to train agent. While following it's behaviour policy μ(a|s), it evaluates optimal policy π(a|s) to get optimal Q(s,a) values.
 
 ## Results
+
 ### Training
+
 ![](https://i.imgur.com/BUzFVQv.png)
 
-
-
 ### Testing
+
 ![](https://i.imgur.com/lqs13Rz.png)
 
 ## Limitations
+
 * With this approach optimal policy cannot be obtained because snake's obstacle avoidance logic can dodge only immediate obstacles.
 * Since the agent can only see its immediate obstacles, there are high possibilities of agent being entangled in a loop which results in death after few steps.
+* The state space is not large enough to derive an optimal policy for the game using Tabular Methods(A very large state space will be required if one was to attempt to use tabular method to find a optimal policy).
+* The state spcae cannot be generalised for all states of the environment.
+
+## Multisnake Environment
+
+We trained the snake in a solo world, then got the policy from it and fed it into the  individual snakes of this multi snake environment.
+
+![](https://i.imgur.com/qSTImYz.gif)
+
+Run `2Snake.py` to have 2 Agents play the game simultaneously and `3Snake.py` to have 3 Agents.
+
+![](https://i.imgur.com/41RV94Z.gif)
+
+## Walled Environment
+
+To add walls make changes in the `snake/env.py` file and execute the `SnakeAI.py`
+
+![](https://i.imgur.com/DA7xWzZ.gif)
+
 # Environment
 
 #### Created in response to OpenAI's [Requests for Research 2.0](https://blog.openai.com/requests-for-research-2/)
@@ -75,5 +107,3 @@ Many of the aspects of the game can be changed for both environments. See the Ga
 1. Clone this repository
 2. Navigate to the cloned repository
 3. Run command `$ pip install -e ./`
-
-
