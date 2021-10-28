@@ -21,6 +21,12 @@ try:
 except:
 	q_val = np.zeros((4,2,2,2,3))
 def policy(epsilon,d,frud,fob,lob,rob):
+	'''Policy function helps to determine the suitable action for an agent for a state.State parameters are passed to the 
+	fucntion -
+	frud - direction of food relative to snake's head
+	fob = to check presence of obstacle in immediate Forward block of snake's head
+	lob = to check presence of obstacle in immediate Left block of snake's head
+	rob = to check presence of obstacle in immediate Right block of snake's head'''
 #defining rule for relative directions
 	l = d-1	#Relative left	
 	r = d+1	#Relative right
@@ -53,38 +59,6 @@ def policy(epsilon,d,frud,fob,lob,rob):
 			
 def gen_episode (env,alpha,gamma,epsilon): 
 	'''To generate one episode. Returns episodic reward and total steps taken.'''
-	def check_deth(x,y,d,act):
-		'''Function to check death by wall. Returns true if chosen action leads to death by wall.'''
-		que = False
-		if x ==14:
-			if d==0 and act==2:
-				que=True
-			if d==2 and act==0:
-				que = True
-			if d==1 and act==1:
-				que = True
-		if y==0:
-			if d==0 and act==1:
-				que=True
-			if d==1 and act==0:
-				que = True
-			if d==3 and act==2:
-				que = True
-		if y==14:
-			if d==3 and act==0:
-				que=True
-			if d==2 and act==1:
-				que = True
-			if d==1 and act==2:
-				que = True
-		if x==0:
-			if d==0 and act==0:
-				que=True
-			if d==2 and act==2:
-				que = True
-			if d==3 and act==1:
-				que = True
-		return que
 	def get_fruit(obs):
 		'''Function to obtain coordinates of food on grid.Returns list which contains x and y coordinates of each food block.'''
 		fru_loc = []
