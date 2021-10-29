@@ -57,38 +57,6 @@ def policy(epsilon,d,frud,fob,lob,rob):
 			
 def gen_episode (env,alpha,gamma,epsilon): 
 	'''To generate one episode. Returns episodic reward and total steps taken.'''
-	def check_deth(x,y,d,act):
-		'''Function to check death by wall. Returns true if chosen action leads to death by wall.'''
-		que = False
-		if x ==14:
-			if d==0 and act==2:
-				que=True
-			if d==2 and act==0:
-				que = True
-			if d==1 and act==1:
-				que = True
-		if y==0:
-			if d==0 and act==1:
-				que=True
-			if d==1 and act==0:
-				que = True
-			if d==3 and act==2:
-				que = True
-		if y==14:
-			if d==3 and act==0:
-				que=True
-			if d==2 and act==1:
-				que = True
-			if d==1 and act==2:
-				que = True
-		if x==0:
-			if d==0 and act==0:
-				que=True
-			if d==2 and act==2:
-				que = True
-			if d==3 and act==1:
-				que = True
-		return que
 	def get_fruit(obs):
 		'''Function to obtain coordinates of food on grid.Returns x,y'''
 		for j in range(0,y_max*10,10):
@@ -245,7 +213,6 @@ def gen_episode (env,alpha,gamma,epsilon):
 		frud,fob,lob,rob = get_state(obs,x,y,x_f,y_f,dr)
 		action,st = policy(epsilon,dr,frud,fob,lob,rob)
 		dr_new = action
-		ch = check_deth(x,y,dr_new,action)
 		obs,rew,done, info = env.step(action)
 		if rew==1:
 			x_f, y_f = get_fruit(obs)
@@ -289,6 +256,7 @@ if __name__ =="__main__":
 	gamma = 0.2
 	ep = 5000
 	for i in range(0,ep):
+		#To train the agent uncomment and use below line
 		rew,steps = gen_episode(env,alpha,gamma,(200/(200+i)))
 		'''for epsilon =0. Uncomment below line'''
 		#rew,steps = gen_episode(env,alpha,gamma,0) 
