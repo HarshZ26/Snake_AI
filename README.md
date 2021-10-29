@@ -11,23 +11,23 @@ This is an attempt to solve classic snake game using Reinforcement learning meth
 
 ### Action Space
 
-One important thing to note is that all the actions and directions are relative to snake's head. They are related by following relation-
-
-Current Directions(as mentioned in snakeEnv)-
+The action space consists of 4 actions -
 
 	UP    - 0
 	RIGHT - 1
 	DOWN  - 2
 	LEFT  - 4
 	
+All the actions and directions are absolute to the environment, but for the agent these actions made relative with respect to the head of the snake so as to correspond to the state space. They are related by following relation-
+
 New relative actions-
 	
-	LEFT     -  d-1
-	RIGHT    -  d+1
-	FORWARD  -  d 
-	BACKWARD -  abs(d-2)
+	LEFT     -  (d+3)%4
+	RIGHT    -  (d+1)%4
+	FORWARD  -  (d)%4
+	BACKWARD -  (d+2)%4
     
-Where d is the direction of snake's head. All the exceptions are handled for particular direction. For example - if a head is facing UP, so relatively LEFT action must be 3 not -1. Similarly other exceptions are handled.
+Where `d` is the direction of the snake's head. All the exceptions are handled for a particular direction. For example - if the head is facing `UP`, so relatively `LEFT` action must be `3` not `-1`. Similarly other exceptions are handled.
 
 ### State Space
 
@@ -51,7 +51,7 @@ Except above two conditions by default value of reward function is 0.
 
 ### Algorithm
 
-Off-policy learning method namely Q-learning is used to train agent. While following it's behaviour policy μ(a|s), it evaluates optimal policy π(a|s) to get optimal Q(s,a) values.
+Off-policy learning method, namely Q-learning is used to train agent. While following it's behaviour policy μ(a|s), it evaluates optimal policy π(a|s) to get optimal Q(s,a) values.
 
 ## Results
 
@@ -65,10 +65,10 @@ Off-policy learning method namely Q-learning is used to train agent. While follo
 
 ## Limitations
 
-* With this approach optimal policy cannot be obtained because snake's obstacle avoidance logic can dodge only immediate obstacles.
-* Since the agent can only see its immediate obstacles, there are high possibilities of agent being entangled in a loop which results in death after few steps.
-* The state space is not large enough to derive an optimal policy for the game using Tabular Methods(A very large state space will be required if one was to attempt to use tabular method to find a optimal policy).
-* The state spcae cannot be generalised for all states of the environment.
+* With this approach optimal policy cannot be obtained because the snake's obstacle dodging logic can dodge only immediate obstacles.
+* Since the agent can only see its immediate obstacles, there are high possibilities of the agent being entangled in a loop which results in death after few steps.
+* The state space is not large enough to derive an optimal policy for the game using Tabular Methods (A very large state space will be required if one was to attempt to use tabular method to find an optimal policy).
+* The state spcae cannot be generalized for all states of the environment.
 
 ## Multisnake Environment
 
