@@ -99,9 +99,9 @@ Many of the aspects of the game can be changed for both environments. See the Ga
 
 ## Dependencies
 - pip
-- gym
-- numpy
-- matplotlib
+- OpenAI Gym
+- NumPy
+- Matplotlib
 
 ## Installation
 1. Clone this repository
