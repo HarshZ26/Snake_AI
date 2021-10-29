@@ -68,7 +68,7 @@ Off-policy learning method, namely Q-learning is used to train agent. While foll
 * With this approach optimal policy cannot be obtained because the snake's obstacle dodging logic can dodge only immediate obstacles.
 * Since the agent can only see its immediate obstacles, there are high possibilities of the agent being entangled in a loop which results in death after few steps.
 * The state space is not large enough to derive an optimal policy for the game using Tabular Methods (A very large state space will be required if one was to attempt to use tabular method to find an optimal policy).
-* The state spcae cannot be generalized for all states of the environment.
+* The state space cannot be generalized for all states of the environment.
 
 ## Multisnake Environment
 
