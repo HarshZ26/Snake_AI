@@ -16,16 +16,16 @@ The action space consists of 4 actions -
 	UP    - 0
 	RIGHT - 1
 	DOWN  - 2
-	LEFT  - 4
+	LEFT  - 3
 	
 All the actions and directions are absolute to the environment, but for the agent these actions made relative with respect to the head of the snake so as to correspond to the state space. They are related by following relation-
 
 New relative actions-
 	
-	LEFT     -  (d+3)%4
-	RIGHT    -  (d+1)%4
-	FORWARD  -  (d)%4
-	BACKWARD -  (d+2)%4
+	LEFT     -  d-1
+	RIGHT    -  d+1
+	FORWARD  -  d 
+	BACKWARD -  abs(d-2)
     
 Where `d` is the direction of the snake's head. All the exceptions are handled for a particular direction. For example - if the head is facing `UP`, so relatively `LEFT` action must be `3` not `-1`. Similarly other exceptions are handled.
 
@@ -33,10 +33,10 @@ Where `d` is the direction of the snake's head. All the exceptions are handled f
 
 A state is defined by 4 parameters, these are
 
-a) Relative direction of the food - 4
-b) Presence of obstacle or border immediately to the left of the snake head - 2 (0 or 1)
-c) Presence of obstacle or border immediately to the right of the snake head
-d) Presence of obstacle or border in front of the snake head
+	a) Relative direction of the food - 4
+	b) Presence of obstacle or border immediately to the left of the snake head - 2 (0 or 1)
+	c) Presence of obstacle or border immediately to the right of the snake head
+	d) Presence of obstacle or border in front of the snake head
 
 This establishes a state space that has (4 x 2 x 2 x 2) = 32 states
 
