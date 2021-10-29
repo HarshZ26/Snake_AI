@@ -22,10 +22,10 @@ All the actions and directions are absolute to the environment, but for the agen
 
 New relative actions-
 	
-	LEFT     -  d-1
-	RIGHT    -  d+1
-	FORWARD  -  d 
-	BACKWARD -  abs(d-2)
+	LEFT     -  (d+3)%4
+	RIGHT    -  (d+1)%4
+	FORWARD  -  (d)%4
+	BACKWARD -  (d+2)%4
     
 Where `d` is the direction of the snake's head. All the exceptions are handled for a particular direction. For example - if the head is facing `UP`, so relatively `LEFT` action must be `3` not `-1`. Similarly other exceptions are handled.
 
