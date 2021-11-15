@@ -246,15 +246,15 @@ if __name__ =="__main__":
 	rew_list = []
 	step_list = []
 	#In windows uncomment below line.In linux use next 7 lines and comment below line. 
-	#env = gym.make(id=name,grid_size=[y_max,x_max], unit_size=10, unit_gap=1, snake_size=3, n_snakes=1, n_foods=1, random_init=True)
+	env = gym.make(id=name,grid_size=[y_max,x_max], unit_size=10, unit_gap=1, snake_size=3, n_snakes=1, n_foods=1, random_init=True)
 
-	env = gym.make(name)
-	env.grid_size = [y_max,x_max]
-	env.unit_size = 10
-	env.unit_gap = 1
-	env.snake_size = 3
-	env.n_snakes = 1
-	env.n_foods = 1
+# 	env = gym.make(name)
+# 	env.grid_size = [y_max,x_max]
+# 	env.unit_size = 10
+# 	env.unit_gap = 1
+# 	env.snake_size = 3
+# 	env.n_snakes = 1
+# 	env.n_foods = 1
 		
 	alpha = 0.1
 	gamma = 0.2
